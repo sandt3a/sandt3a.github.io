@@ -1,0 +1,16 @@
+---
+import ArchivePanel from "@components/ArchivePanel.svelte";
+import I18nKey from "@i18n/i18nKey";
+import { i18n } from "@i18n/translation";
+import MainGridLayout from "@layouts/MainGridLayout.astro";
+import { getSortedPostsList } from "../utils/content-utils";
+import { toSiteLang } from "../utils/url-utils";
+
+const lang = "zh-cn";
+const siteLang = toSiteLang(lang);
+const sortedPostsList = await getSortedPostsList(lang);
+---
+
+<MainGridLayout title={i18n(I18nKey.archive, siteLang)} lang={siteLang}>
+    <ArchivePanel sortedPosts={sortedPostsList} client:only="svelte"></ArchivePanel>
+</MainGridLayout>
