@@ -3,7 +3,7 @@ import Icon from "@iconify/svelte";
 import { onMount } from "svelte";
 import { switchLangUrl, type Lang } from "../utils/url-utils";
 
-let currentLang = $state<Lang>("zh-cn");
+let currentLang: Lang = "zh-cn";
 
 onMount(() => {
 	const p = window.location.pathname;
