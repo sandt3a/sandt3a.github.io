@@ -1,10 +1,6 @@
 # About
 
-This is my bilingual blog.
+Student from XDU@2024
+This is my blog for recording.
 
-- Chinese homepage: `/`
-- English homepage: `/en/`
-- Chinese posts: `/posts/...`
-- English posts: `/en/posts/...`
-
-This page is where I introduce the site, what I write about, and how to contact me.
+Your can contact me through QQ: 3061496286
