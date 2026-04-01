@@ -2,9 +2,9 @@ import { type CollectionEntry, getCollection } from "astro:content";
 import I18nKey from "@i18n/i18nKey";
 import { i18n } from "@i18n/translation";
 import {
-	type Lang,
 	DEFAULT_LANG,
 	getCategoryUrl,
+	type Lang,
 	toSiteLang,
 } from "@utils/url-utils.ts";
 
@@ -61,15 +61,18 @@ export type Tag = {
 };
 
 export async function getTagList(lang?: Lang): Promise<Tag[]> {
-	const allBlogPosts = await getCollection<"posts">("posts", ({ data, slug }) => {
-		const isNotDraft = import.meta.env.PROD ? data.draft !== true : true;
+	const allBlogPosts = await getCollection<"posts">(
+		"posts",
+		({ data, slug }) => {
+			const isNotDraft = import.meta.env.PROD ? data.draft !== true : true;
 
-		if (!lang) {
-			return isNotDraft;
-		}
+			if (!lang) {
+				return isNotDraft;
+			}
 
-		return isNotDraft && slug.startsWith(`${lang}/`);
-	});
+			return isNotDraft && slug.startsWith(`${lang}/`);
+		},
+	);
 
 	const countMap: { [key: string]: number } = {};
 	allBlogPosts.forEach((post: { data: { tags: string[] } }) => {
@@ -94,19 +97,25 @@ export type Category = {
 };
 
 export async function getCategoryList(lang?: Lang): Promise<Category[]> {
-	const allBlogPosts = await getCollection<"posts">("posts", ({ data, slug }) => {
-		const isNotDraft = import.meta.env.PROD ? data.draft !== true : true;
+	const allBlogPosts = await getCollection<"posts">(
+		"posts",
+		({ data, slug }) => {
+			const isNotDraft = import.meta.env.PROD ? data.draft !== true : true;
 
-		if (!lang) {
-			return isNotDraft;
-		}
+			if (!lang) {
+				return isNotDraft;
+			}
 
-		return isNotDraft && slug.startsWith(`${lang}/`);
-	});
+			return isNotDraft && slug.startsWith(`${lang}/`);
+		},
+	);
 	const count: { [key: string]: number } = {};
 	allBlogPosts.forEach((post: { data: { category: string | null } }) => {
 		if (!post.data.category) {
-			const ucKey = i18n(I18nKey.uncategorized, toSiteLang(lang || DEFAULT_LANG));
+			const ucKey = i18n(
+				I18nKey.uncategorized,
+				toSiteLang(lang || DEFAULT_LANG),
+			);
 			count[ucKey] = count[ucKey] ? count[ucKey] + 1 : 1;
 			return;
 		}

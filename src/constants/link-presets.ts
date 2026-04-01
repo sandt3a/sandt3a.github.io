@@ -3,7 +3,9 @@ import { i18n } from "@i18n/translation";
 import { type Lang, toSiteLang } from "@utils/url-utils";
 import { LinkPreset, type NavBarLink } from "@/types/config";
 
-export function getLinkPresets(lang: Lang): { [key in LinkPreset]: NavBarLink } {
+export function getLinkPresets(lang: Lang): {
+	[key in LinkPreset]: NavBarLink;
+} {
 	const siteLang = toSiteLang(lang);
 
 	return {

@@ -44,14 +44,21 @@ export function getTagUrl(tag: string, lang: Lang = DEFAULT_LANG): string {
 	return urlWithLang(`/archive/?tag=${encodeURIComponent(tag.trim())}`, lang);
 }
 
-export function getCategoryUrl(category: string | null, lang: Lang = DEFAULT_LANG): string {
+export function getCategoryUrl(
+	category: string | null,
+	lang: Lang = DEFAULT_LANG,
+): string {
 	if (
 		!category ||
 		category.trim() === "" ||
-		category.trim().toLowerCase() === i18n(I18nKey.uncategorized, toSiteLang(lang)).toLowerCase()
+		category.trim().toLowerCase() ===
+			i18n(I18nKey.uncategorized, toSiteLang(lang)).toLowerCase()
 	)
 		return urlWithLang("/archive/?uncategorized=true", lang);
-	return urlWithLang(`/archive/?category=${encodeURIComponent(category.trim())}`, lang);
+	return urlWithLang(
+		`/archive/?category=${encodeURIComponent(category.trim())}`,
+		lang,
+	);
 }
 
 export function getDir(path: string): string {

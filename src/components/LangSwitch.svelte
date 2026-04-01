@@ -1,7 +1,7 @@
 <script lang="ts">
 import Icon from "@iconify/svelte";
 import { onMount } from "svelte";
-import { switchLangUrl, type Lang } from "../utils/url-utils";
+import { type Lang, switchLangUrl } from "../utils/url-utils";
 
 let currentLang: Lang = "zh-cn";
 
