@@ -1,6 +1,6 @@
 ---
 title: Test Post With Image
-published: 2026-04-01
+published: 1200-04-01
 description: An example post using a folder-based asset directory for the cover image.
 image: ./assets/cover.png
 tags:

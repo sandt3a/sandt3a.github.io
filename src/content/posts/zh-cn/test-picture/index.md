@@ -1,6 +1,6 @@
 ---
 title: 带图片的测试文章
-published: 2026-04-01
+published: 1200-04-01
 description: 使用文件夹结构和 assets 目录保存封面图的示例文章。
 image: ./assets/cover.png
 tags:
