@@ -5,7 +5,7 @@ description: A bilingual static blog example built with Astro and Fuwari.
 tags:
   - start
 category: Notes
-draft: false
+draft: true
 lang: en
 ---
 

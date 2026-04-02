@@ -5,7 +5,7 @@ description: 一个使用 Astro 和 Fuwari 构建的双语静态博客示例。
 tags:
   - 开始
 category: 随笔
-draft: false
+draft: true
 lang: zh_CN
 ---
 
