@@ -9,14 +9,14 @@ import {
 } from "@utils/url-utils.ts";
 
 async function getRawSortedPosts(lang?: Lang) {
-	const allBlogPosts = await getCollection("posts", ({ data, slug }) => {
+	const allBlogPosts = await getCollection("posts", ({ data, id }) => {
 		const isNotDraft = import.meta.env.PROD ? data.draft !== true : true;
 
 		if (!lang) {
 			return isNotDraft;
 		}
 
-		return isNotDraft && slug.startsWith(`${lang}/`);
+		return isNotDraft && id.startsWith(`${lang}/`);
 	});
 
 	const sorted = allBlogPosts.sort((a, b) => {
@@ -31,11 +31,11 @@ export async function getSortedPosts(lang?: Lang) {
 	const sorted = await getRawSortedPosts(lang);
 
 	for (let i = 1; i < sorted.length; i++) {
-		sorted[i].data.nextSlug = sorted[i - 1].slug;
+		sorted[i].data.nextSlug = sorted[i - 1].id;
 		sorted[i].data.nextTitle = sorted[i - 1].data.title;
 	}
 	for (let i = 0; i < sorted.length - 1; i++) {
-		sorted[i].data.prevSlug = sorted[i + 1].slug;
+		sorted[i].data.prevSlug = sorted[i + 1].id;
 		sorted[i].data.prevTitle = sorted[i + 1].data.title;
 	}
 
@@ -49,7 +49,7 @@ export async function getSortedPostsList(lang?: Lang): Promise<PostForList[]> {
 	const sortedFullPosts = await getRawSortedPosts(lang);
 
 	const sortedPostsList = sortedFullPosts.map((post) => ({
-		slug: post.slug,
+		slug: post.id,
 		data: post.data,
 	}));
 
@@ -63,14 +63,14 @@ export type Tag = {
 export async function getTagList(lang?: Lang): Promise<Tag[]> {
 	const allBlogPosts = await getCollection<"posts">(
 		"posts",
-		({ data, slug }) => {
+		({ data, id }) => {
 			const isNotDraft = import.meta.env.PROD ? data.draft !== true : true;
 
 			if (!lang) {
 				return isNotDraft;
 			}
 
-			return isNotDraft && slug.startsWith(`${lang}/`);
+			return isNotDraft && id.startsWith(`${lang}/`);
 		},
 	);
 
@@ -99,14 +99,14 @@ export type Category = {
 export async function getCategoryList(lang?: Lang): Promise<Category[]> {
 	const allBlogPosts = await getCollection<"posts">(
 		"posts",
-		({ data, slug }) => {
+		({ data, id }) => {
 			const isNotDraft = import.meta.env.PROD ? data.draft !== true : true;
 
 			if (!lang) {
 				return isNotDraft;
 			}
 
-			return isNotDraft && slug.startsWith(`${lang}/`);
+			return isNotDraft && id.startsWith(`${lang}/`);
 		},
 	);
 	const count: { [key: string]: number } = {};

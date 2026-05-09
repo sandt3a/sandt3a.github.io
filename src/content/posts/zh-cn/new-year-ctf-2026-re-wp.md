@@ -1,5 +1,5 @@
 ---
-title: 'Newyearctf 2026 逆向WP'
+title: 'New Year CTF 2026 逆向WP'
 published: 2026-04-01
 description: '给新年小比赛出的题'
 image: ''
@@ -11,13 +11,13 @@ draft: false
 lang: 'zh_CN'
 ---
 
-给新年小比赛出了两道逆向题
+给XDSEC的新年小比赛出了两道逆向题
 
 ## nonogram
 
 底层逻辑是把flag画成了数织，为了保证解唯一加了个crc32的check（感觉很意义不明，但是不知道怎么控制解唯一）
 
-埋了个坑，让数织的线索在.init里加载。
+埋了个坑，让数织的线索在.init里加载。下面是AI写的解题脚本，把数织画出来之后OCR或者用人眼看。
 
 ```python
 #!/usr/bin/env python3
