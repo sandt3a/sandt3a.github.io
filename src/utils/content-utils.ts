@@ -61,18 +61,15 @@ export type Tag = {
 };
 
 export async function getTagList(lang?: Lang): Promise<Tag[]> {
-	const allBlogPosts = await getCollection<"posts">(
-		"posts",
-		({ data, id }) => {
-			const isNotDraft = import.meta.env.PROD ? data.draft !== true : true;
+	const allBlogPosts = await getCollection<"posts">("posts", ({ data, id }) => {
+		const isNotDraft = import.meta.env.PROD ? data.draft !== true : true;
 
-			if (!lang) {
-				return isNotDraft;
-			}
+		if (!lang) {
+			return isNotDraft;
+		}
 
-			return isNotDraft && id.startsWith(`${lang}/`);
-		},
-	);
+		return isNotDraft && id.startsWith(`${lang}/`);
+	});
 
 	const countMap: { [key: string]: number } = {};
 	allBlogPosts.forEach((post: { data: { tags: string[] } }) => {
@@ -97,18 +94,15 @@ export type Category = {
 };
 
 export async function getCategoryList(lang?: Lang): Promise<Category[]> {
-	const allBlogPosts = await getCollection<"posts">(
-		"posts",
-		({ data, id }) => {
-			const isNotDraft = import.meta.env.PROD ? data.draft !== true : true;
+	const allBlogPosts = await getCollection<"posts">("posts", ({ data, id }) => {
+		const isNotDraft = import.meta.env.PROD ? data.draft !== true : true;
 
-			if (!lang) {
-				return isNotDraft;
-			}
+		if (!lang) {
+			return isNotDraft;
+		}
 
-			return isNotDraft && id.startsWith(`${lang}/`);
-		},
-	);
+		return isNotDraft && id.startsWith(`${lang}/`);
+	});
 	const count: { [key: string]: number } = {};
 	allBlogPosts.forEach((post: { data: { category: string | null } }) => {
 		if (!post.data.category) {
