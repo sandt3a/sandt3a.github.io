@@ -33,4 +33,4 @@ yarn.lock
 # extra
 .codex
 .claude/
-mydata/
+draft/
